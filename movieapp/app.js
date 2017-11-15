@@ -2,17 +2,17 @@
 	Movieapp - Backend Service to search the Open Movie Database
 
 	Request:
-		POST request including JSON with "name" (required) and "year" (optional) keys
+		POST request on port 8080 including JSON with "name" (required) and "year" (optional) keys
 
 	Response:
 		JSON response from the OMDB API at http://www.omdbapi.com
 
 	Author:
 		Brian Berndt
+		Based on code from http://www.learnsteady.com/express-4-quick-guide/
 
 	Version:
 		1.0, 14-Nov-2017
-
 **/
 
 var express = require('express');
@@ -33,7 +33,7 @@ var port = process.env.PORT || 8080;
 // Define Express API Router
 var router = express.Router();
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -48,20 +48,20 @@ app.use('/', router);
 
 app.use('/users', users);
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
+// Error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
   res.render('error');
 });
@@ -94,7 +94,6 @@ router.post('/', function (req, res) {
 		}
 		res.send(response);
 	});
-
 });
 
 // Define GET response
